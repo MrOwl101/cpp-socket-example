@@ -16,11 +16,10 @@ int main()
     int conn;
     int clilen;
     
-    // czy ponizsza definicja struktury jest poprawna ?
     struct sockaddr_in server_addr, client_addr;
 
-    // Utowrzenie strumienia STREAM [TCP] z uzyciem gniazda dla protokolu (IP)
-    sock = socket(PF_INET,SOCK_STREAM,0);   // 0 to protokul IP ?
+    // creating TCP stream, using Internet Protocol (IP)
+    sock = socket(PF_INET,SOCK_STREAM,0);
     
     if(sock < 0){
         perror("creating socket");
@@ -40,7 +39,7 @@ int main()
         }
 
     if(listen(sock,5) < 0){
-        perror("listen failed");    // tutaj wywala blad ; zle podalem argument po znaku mniejszosci, mialo byc 0 a nie 5
+        perror("listen failed");
         exit(3);
     }
 
