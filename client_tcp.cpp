@@ -17,7 +17,7 @@ int main()
     struct sockaddr_in server_addr;
     char buffer[1024];
 
-    //utworzenie strumienia STREAM(TCP) dla protokołu IP
+    //creating TCP stream, for Internet Protocol (IP)
     sock = socket(PF_INET, SOCK_STREAM, 0);
     if(sock < 0)
     {
@@ -25,10 +25,10 @@ int main()
         exit(1);
     }
 
-    memset(&server_addr, 0, sizeof(server_addr));       //wyczyszczenie adresu serwera
-    server_addr.sin_family = AF_INET;                   //adres inet
-    inet_aton(SERVERADDR, &server_addr.sin_addr);       //adres ip servera
-    server_addr.sin_port = htons(PORT);                 //port na ktory beda wysylane dane
+    memset(&server_addr, 0, sizeof(server_addr));       //cleaning server address
+    server_addr.sin_family = AF_INET;                   //inet address
+    inet_aton(SERVERADDR, &server_addr.sin_addr);       //IP address of server
+    server_addr.sin_port = htons(PORT);                 //port, where data will be sent
 
     if(
         connect(sock, 
