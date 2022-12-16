@@ -9,15 +9,20 @@
 #include <string.h>
 
 #define PORT 12345
-#define SERVERADDR "127.0.0.1"
+//#define SERVERADDR "192.168.1.34"
 
 int main()
 {
+    std::cout<<"Give IP of a server: ";
+    std::string ip_address_string;
+    std::cin>>ip_address_string;
+    const char * ip_address_char = ip_address_string.c_str();
+    
     int sock;
     struct sockaddr_in server_addr;
     char buffer[1024];
 
-    //creating TCP stream, for Internet Protocol (IP)
+    //utworzenie strumienia STREAM(TCP) dla protokołu IP
     sock = socket(PF_INET, SOCK_STREAM, 0);
     if(sock < 0)
     {
@@ -25,10 +30,10 @@ int main()
         exit(1);
     }
 
-    memset(&server_addr, 0, sizeof(server_addr));       //cleaning server address
-    server_addr.sin_family = AF_INET;                   //inet address
-    inet_aton(SERVERADDR, &server_addr.sin_addr);       //IP address of server
-    server_addr.sin_port = htons(PORT);                 //port, where data will be sent
+    memset(&server_addr, 0, sizeof(server_addr));       //wyczyszczenie adresu serwera
+    server_addr.sin_family = AF_INET;                   //adres inet
+    inet_aton(ip_address_char, &server_addr.sin_addr);       //adres ip servera
+    server_addr.sin_port = htons(PORT);                 //port na ktory beda wysylane dane
 
     if(
         connect(sock, 
